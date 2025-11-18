@@ -8,7 +8,7 @@ setup(
   author = 'Pooya Fekri, Victor Ginelli (@youngkidwarrior)',
   author_email = 'pooyafekri79@gmail.com, victor@she.energy',
   url = 'https://github.com/BrightID/python-brightid',
-  download_url = 'https://github.com/BrightID/python-brightid/archive/main.zip',
+  download_url = 'https://github.com/BrightID/brightid-python-sdk/archive/main.zip',
   keywords = ['Brightid'],
   install_requires=[
           'requests',
