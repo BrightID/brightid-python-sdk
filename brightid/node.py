@@ -1,6 +1,6 @@
 import requests
 
-from . import users, groups, operations, verifications, testblocks, apps
+from . import users, groups, operations, verifications, apps
 
 
 class Node:
@@ -10,7 +10,6 @@ class Node:
         self.groups = groups.Groups(self)
         self.operations = operations.Operations(self)
         self.verifications = verifications.Verifications(self)
-        self.testblocks = testblocks.Testblocks(self)
         self.apps = apps.Apps(self)
 
     def state(self):

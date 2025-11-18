@@ -1,7 +1,7 @@
-import ed25519
 import json
 import base64
 import pyqrcode
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
 
 def create_deep_link(app, app_user_id):
@@ -16,7 +16,7 @@ def create_qr(deep_link, scale=8):
 
 
 def sign(op, private):
-    signing_key = ed25519.SigningKey(base64.b64decode(private))
+    signing_key = Ed25519PrivateKey.from_private_bytes(base64.b64decode(private))
     message = json.dumps(op, sort_keys=True,
                          separators=(',', ':')).encode('ascii')
     sig = signing_key.sign(message)
@@ -25,9 +25,10 @@ def sign(op, private):
 
 
 def create_bright_id():
-    private, public = ed25519.create_keypair()
-    private = base64.b64encode(private.to_bytes()).decode('ascii')
-    public = base64.b64encode(public.to_bytes()).decode('ascii')
+    private = Ed25519PrivateKey.generate()
+    public = private.public_key()
+    private = base64.b64encode(private.private_bytes_raw()).decode('ascii')
+    public = base64.b64encode(public.public_bytes_raw()).decode('ascii')
     id = public.strip('=').replace('/', '_').replace('+', '-')
     return {
         'id': id,
